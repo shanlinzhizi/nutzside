@@ -6,7 +6,10 @@ import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Localization;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.annotation.Views;
 import org.nutz.mvc.ioc.provider.ComboIocProvider;
+
+import com.nutzside.common.view.FreemarkerViewMaker;
 
 @IocBy(type=ComboIocProvider.class,args={"*org.nutz.ioc.loader.json.JsonLoader","ioc/",
 	  "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","cn.nutzside"})
@@ -15,5 +18,6 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 @Localization("msg")
 @Ok("ioc:json")
 @Fail("json")
+@Views({FreemarkerViewMaker.class})  
 public class MainModule {
 }

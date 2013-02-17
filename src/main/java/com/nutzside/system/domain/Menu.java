@@ -25,6 +25,7 @@ public class Menu {
 	@Column
 	@ColDefine(type = ColType.VARCHAR, width = 500)
 	private String description;
+
 	@Column
 	private Long lft;
 	@Column
