@@ -15,15 +15,19 @@ import org.nutz.mvc.ioc.provider.ComboIocProvider;
 import com.nutzside.common.mvc.view.FreemarkerViewMaker;
 import com.nutzside.common.mvc.view.JPEGViewMaker;
 import com.nutzside.system.shiro.ShiroActionFilter;
-@IocBy(type=ComboIocProvider.class,args={"*org.nutz.ioc.loader.json.JsonLoader","ioc/",
-	  "*org.nutz.ioc.loader.annotation.AnnotationIocLoader","cn.nutzside"})
+
 @Encoding(input="utf8",output="utf8")
-@Modules(scanPackage=true)
-@SetupBy(MvcSetup.class)
-@Filters({ @By(type = ShiroActionFilter.class) })
-@Localization("msg")
+@Modules(scanPackage = true)
 @Ok("json")
 @Fail("json")
-@Views({FreemarkerViewMaker.class,JPEGViewMaker.class})  
+@IocBy(type = ComboIocProvider.class, args = {
+		"*org.nutz.ioc.loader.json.JsonLoader", "ioc/",
+		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.nutzside" })
+@SetupBy(value = MvcSetup.class)
+// 全局的Shiro注解过滤器
+@Filters(@By(type = ShiroActionFilter.class, args = "/login.html"))
+@Localization("msg")
+@Views({ FreemarkerViewMaker.class, JPEGViewMaker.class })
 public class MainModule {
+
 }

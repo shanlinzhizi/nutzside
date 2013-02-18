@@ -36,7 +36,7 @@ public class SystemModule {
 	
 	@At
 	@RequiresGuest
-	public void login(@Param("name") String number, @Param("passwd") String password,
+	public void login(@Param("username") String number, @Param("password") String password,
 			@Param("rememberMe") boolean rememberMe, @Param("code") String code,HttpServletRequest request) {
 		String host = request.getRemoteHost();
 		//String auth=(String) Session.getAttribute(JPEGView.CAPTCHA);
