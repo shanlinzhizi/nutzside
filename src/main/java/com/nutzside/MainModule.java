@@ -22,7 +22,7 @@ import com.nutzside.system.shiro.ShiroActionFilter;
 @SetupBy(MvcSetup.class)
 @Filters({ @By(type = ShiroActionFilter.class) })
 @Localization("msg")
-@Ok("ioc:json")
+@Ok("json")
 @Fail("json")
 @Views({FreemarkerViewMaker.class,JPEGViewMaker.class})  
 public class MainModule {

@@ -4,36 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>管理平台</title>
 <link href="themes/css/login.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${base}/js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
 <script type="text/javascript">
-$(function () {
-	var $loginForm = $("#login_form");
-	var $username = $("#username");
-	var $password = $("#password");
+/
+$(function() {
 	
-	$loginForm.submit(function () {
-		if ($username.val() == "") {
-			
-			return false;
+	$("#loginForm").submit(function() {
+		if($(this).valid()){
+			var logonFormInfo = $(this).serializeObject();
+			$.post('login',logonFormInfo,function(response){
+				if(null==response){
+					window.location="main";
+				}else{
+					$('#loginForm')[0].reset();
+				
+				}
+			},"json");
+		}else{
+		  null;
 		}
-		if ($password.val() == "") {
-			
-			return false;
-		}
-	
-		$.post("${base}/logon", {
-			"name" : $username.val(),
-			"passwd" : $password.val(),
-		}, function(data) {
-			if (data.ok==true) {
-				location.href='index.html';
-			} else {
-				null;
-			}
-		}, "json");
 		return false;
 	});
-	
 });
 </script>
 </head>
@@ -41,9 +32,7 @@ $(function () {
 <body>
 	<div id="login">
 		<div id="login_header">
-			<h1 class="login_logo">
-				<a href="http://demo.dwzjs.com"><img src="themes/default/images/login_logo.gif" /></a>
-			</h1>
+			
 		</div>
 		<div id="login_content">
 			<div class="loginForm">
@@ -61,7 +50,7 @@ $(function () {
 					</div>
 				</form>
 			</div>
-			<div class="login_banner"><img src="themes/default/images/login_banner.jpg" /></div>
+			<div class="login_banner"></div>
 			
 		</div>
 		<div id="login_footer">

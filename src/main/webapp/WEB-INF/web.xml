@@ -33,7 +33,7 @@
   </filter-mapping>
   <servlet>
     <servlet-name>JspSupportServlet</servlet-name>
-    <servlet-class>org.nutz.mvc.view.JspSupportServlet</servlet-class>
+    <servlet-class>com.nutzside.common.mvc.view.JspSupportServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <welcome-file-list>
