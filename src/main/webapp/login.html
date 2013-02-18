@@ -10,7 +10,6 @@ $(function () {
 	var $loginForm = $("#login_form");
 	var $username = $("#username");
 	var $password = $("#password");
-	var $captcha = $("#captcha");
 	
 	$loginForm.submit(function () {
 		if ($username.val() == "") {
@@ -22,12 +21,12 @@ $(function () {
 			return false;
 		}
 	
-		$.post("${base}/usr/login", {
+		$.post("${base}/logon", {
 			"name" : $username.val(),
 			"passwd" : $password.val(),
 		}, function(data) {
 			if (data.ok==true) {
-				location.href='${base}/main';
+				location.href='index.html';
 			} else {
 				null;
 			}

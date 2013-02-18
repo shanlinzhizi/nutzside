@@ -35,7 +35,7 @@ import com.nutzside.system.service.UserService;
  * @author wendal
  * 
  */
-public class NutDaoRealm extends AuthorizingRealm {
+public class ShiroDbRealm extends AuthorizingRealm {
 
 	private UserService userService;
 	private RoleService roleService;

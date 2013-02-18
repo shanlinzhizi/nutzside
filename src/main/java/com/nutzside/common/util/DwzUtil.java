@@ -20,7 +20,14 @@ public class DwzUtil {
 
 	public static final int OK = 200;
 	public static final int FAIL = 300;
-
+	
+	
+    public static int getstatusCode(String status){
+    	
+        return (status == "OK") ? OK : FAIL;  	
+    }
+    
+    
 	/**
 	 * DwzAjax服务器端响应
 	 * 
@@ -35,6 +42,18 @@ public class DwzUtil {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("statusCode", statusCode);
 		map.put("message", (statusCode == OK) ? "操作成功！" : "操作失败！");
+		if (!Strings.isEmpty(navTabId)) {
+			map.put("navTabId", navTabId);
+			map.put("callbackType", "closeCurrent");
+		}
+		return map;
+	}
+
+	public static Map<String, Object> dialogAjaxMsg(String statusCode,
+			String navTabId, String Msg) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("statusCode", getstatusCode(statusCode));
+		map.put("message", Msg);
 		if (!Strings.isEmpty(navTabId)) {
 			map.put("navTabId", navTabId);
 			map.put("callbackType", "closeCurrent");

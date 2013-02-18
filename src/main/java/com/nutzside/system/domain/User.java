@@ -1,48 +1,31 @@
 package com.nutzside.system.domain;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.nutz.dao.entity.annotation.ColDefine;
 import org.nutz.dao.entity.annotation.ColType;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
-import org.nutz.dao.entity.annotation.Many;
 import org.nutz.dao.entity.annotation.ManyMany;
 import org.nutz.dao.entity.annotation.Table;
-import org.nutz.json.JsonField;
 
+//alter table shiro.system_user add  locked bit(1) NOT NULL default 0;
 @Table("SYSTEM_USER")
 public class User {
+
 	@Id
-	private Long id;
+	private int id;
 	@Column
-	@ColDefine(type = ColType.VARCHAR, width = 20)
-	private String number;
+	private String username;
 	@Column
-	@ColDefine(type = ColType.CHAR, width = 44)
-	@JsonField(ignore = true)
 	private String password;
+	@Column("login_ip")
+	private String loginIP;
 	@Column
-	@ColDefine(type = ColType.CHAR, width = 24)
-	@JsonField(ignore = true)
-	private String salt;
-	@Column
-	@ColDefine(type = ColType.VARCHAR, width = 20)
 	private String name;
-	/**
-	 * 性别 01:男;02:女（由系统枚举表维护）
-	 */
 	@Column
-	@ColDefine(type = ColType.CHAR, width = 2)
-	private String gender;
-	@Column
-	private Integer age;
-	@Column
-	private String birthday;
-	@Column
-	@ColDefine(type = ColType.VARCHAR, width = 20)
-	private String phone;
+	private String email;
 	@Column("is_account_enabled")
 	@ColDefine(notNull = false, type = ColType.BOOLEAN, width = 1)
 	private Boolean accountEnabled;
@@ -66,36 +49,33 @@ public class User {
 	@ColDefine(notNull = false, type = ColType.BOOLEAN, width = 11)
 	private Integer loginFailureCount;
 
-	
+	@ColDefine(notNull = false, type = ColType.TIMESTAMP)
+	@Column("create_date")
+	private Date createDate;
+
+	@Column("modify_date")
+	@ColDefine(notNull = false, type = ColType.TIMESTAMP)
+	private Date modifyDate;
+
+	@Column("login_date")
+	@ColDefine(notNull = false, type = ColType.TIMESTAMP)
+	private Date loginDate;
+	@Column("department")
+	@ColDefine(notNull = false, type = ColType.VARCHAR, width = 255)
+	private String department;
+	@Column
+	@ColDefine(type = ColType.CHAR, width = 24)
+	private String salt;
+
 	@ManyMany(target = Role.class, relation = "SYSTEM_USER_ROLE", from = "USERID", to = "ROLEID")
 	private List<Role> roles;
-	@ManyMany(target = Message.class, relation = "SYSTEM_MESSAGE_RECEIVERUSER", from = "USERID", to = "MESSAGEID")
-	private List<Message> receivedMessages;
-	@Many(target = Message.class, field = "senderUserId")
-	private List<Message> sentMessages;
 
-	public Long getId() {
-		return id;
+	public Date getLockedDate() {
+		return lockedDate;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLockedDate(Date lockedDate) {
+		this.lockedDate = lockedDate;
 	}
 
 	public String getSalt() {
@@ -106,6 +86,46 @@ public class User {
 		this.salt = salt;
 	}
 
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getLoginIP() {
+		return loginIP;
+	}
+
+	public void setLoginIP(String loginIP) {
+		this.loginIP = loginIP;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -114,39 +134,13 @@ public class User {
 		this.name = name;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	
 
 	public Boolean getAccountEnabled() {
 		return accountEnabled;
@@ -154,14 +148,6 @@ public class User {
 
 	public void setAccountEnabled(Boolean accountEnabled) {
 		this.accountEnabled = accountEnabled;
-	}
-
-	public Date getLockedDate() {
-		return lockedDate;
-	}
-
-	public void setLockedDate(Date lockedDate) {
-		this.lockedDate = lockedDate;
 	}
 
 	public Boolean getAccountExpired() {
@@ -196,28 +182,36 @@ public class User {
 		this.loginFailureCount = loginFailureCount;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public Date getCreateDate() {
+		return createDate;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 
-	public List<Message> getReceivedMessages() {
-		return receivedMessages;
+	public Date getLoginDate() {
+		return loginDate;
 	}
 
-	public void setReceivedMessages(List<Message> receivedMessages) {
-		this.receivedMessages = receivedMessages;
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
 	}
 
-	public List<Message> getSentMessages() {
-		return sentMessages;
+	public Date getModifyDate() {
+		return modifyDate;
 	}
 
-	public void setSentMessages(List<Message> sentMessages) {
-		this.sentMessages = sentMessages;
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }

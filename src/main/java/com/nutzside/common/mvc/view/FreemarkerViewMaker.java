@@ -1,4 +1,4 @@
-package com.nutzside.common.view;
+package com.nutzside.common.mvc.view;
 
 import org.nutz.ioc.Ioc;
 import org.nutz.mvc.View;

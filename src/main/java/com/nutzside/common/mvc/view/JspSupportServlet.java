@@ -18,7 +18,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.nutzside.common.view;
+package com.nutzside.common.mvc.view;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

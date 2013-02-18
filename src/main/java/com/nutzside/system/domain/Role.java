@@ -7,7 +7,6 @@ import org.nutz.dao.entity.annotation.ColType;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.dao.entity.annotation.ManyMany;
-import org.nutz.dao.entity.annotation.One;
 import org.nutz.dao.entity.annotation.Table;
 
 @Table("SYSTEM_ROLE")
@@ -15,21 +14,26 @@ public class Role {
 	@Id
 	private Long id;
 	@Column
-	@ColDefine(type = ColType.VARCHAR, width = 20)
+	@ColDefine(type = ColType.VARCHAR, width = 200)
 	private String name;
 	@Column
 	@ColDefine(type = ColType.VARCHAR, width = 500)
 	private String description;
-	@Column
-	private Boolean isOrgaRela;
-	@Column
-	private Long organizationId;
-	@One(target = Organization.class, field = "organizationId")
-	private Organization organization;
 	@ManyMany(target = User.class, relation = "SYSTEM_USER_ROLE", from = "ROLEID", to = "USERID")
 	private List<User> users;
 	@ManyMany(target = Permission.class, relation = "SYSTEM_ROLE_PERMISSION", from = "ROLEID", to = "PERMISSIONID")
 	private List<Permission> permissions;
+	@Column("is_system")
+	@ColDefine(type = ColType.BOOLEAN, width = 1)
+	private boolean system;
+
+	public boolean getSystem() {
+		return system;
+	}
+
+	public void setSystem(boolean system) {
+		this.system = system;
+	}
 
 	public Long getId() {
 		return id;
@@ -53,30 +57,6 @@ public class Role {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Boolean getIsOrgaRela() {
-		return isOrgaRela;
-	}
-
-	public void setIsOrgaRela(Boolean isOrgaRela) {
-		this.isOrgaRela = isOrgaRela;
-	}
-
-	public Long getOrganizationId() {
-		return organizationId;
-	}
-
-	public void setOrganizationId(Long organizationId) {
-		this.organizationId = organizationId;
-	}
-
-	public Organization getOrganization() {
-		return organization;
-	}
-
-	public void setOrganization(Organization organization) {
-		this.organization = organization;
 	}
 
 	public List<User> getUsers() {

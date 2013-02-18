@@ -1,4 +1,4 @@
-package com.nutzside.common.view;
+package com.nutzside.common.mvc.view;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
