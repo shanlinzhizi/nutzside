@@ -8,6 +8,11 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.nutzside.common.freemarker.exception.MustBooleanException;
+import com.nutzside.common.freemarker.exception.MustDateException;
+import com.nutzside.common.freemarker.exception.MustNumberException;
+import com.nutzside.common.freemarker.exception.MustSplitNumberException;
+import com.nutzside.common.freemarker.exception.MustStringException;
 import com.nutzside.common.util.DateTypeEditor;
 
 import freemarker.core.Environment;

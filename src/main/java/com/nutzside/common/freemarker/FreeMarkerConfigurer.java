@@ -12,6 +12,8 @@ import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Files;
 import org.nutz.mvc.Mvcs;
 
+
+
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 
@@ -45,15 +47,16 @@ public class FreeMarkerConfigurer {
 		Configuration configuration = new Configuration();
 		freeMarkerConfigurer.setConfiguration(configuration);
 		loadSettings(configuration);
+		ProcessTimeDirective process_time = ioc.get(ProcessTimeDirective.class, "process");
+		configuration.setSharedVariable("process_time", process_time);
 		LabelDirective label = ioc.get(LabelDirective.class);
 		configuration.setDirectoryForTemplateLoading(new File(path));
 		HtmlCutDirective html_cut = ioc.get(HtmlCutDirective.class);
 		TextCutDirective text_cut = ioc.get(TextCutDirective.class);
-		ProcessTimeDirective process_time = ioc.get(ProcessTimeDirective.class); 
 		configuration.setSharedVariable("label", label);
 		configuration.setSharedVariable("html_cut", html_cut);
 		configuration.setSharedVariable("text_cut", text_cut);
-		configuration.setSharedVariable("process_time", process_time);
+	
 	}
 	
 	protected void loadSettings(Configuration config){		

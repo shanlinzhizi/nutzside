@@ -8,6 +8,7 @@ public class DwzAjaxReturn {
 	String callbackType;
 	Object data;
 
+
 	public int getStatusCode() {
 		return statusCode;
 	}
