@@ -25,9 +25,9 @@ import com.nutzside.system.shiro.ShiroActionFilter;
 		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.nutzside" })
 @SetupBy(value = MvcSetup.class)
 // 全局的Shiro注解过滤器
-@Filters(@By(type = ShiroActionFilter.class, args = "/login.html"))
+@Filters(@By(type = ShiroActionFilter.class, args = "/index.jsp"))
 @Localization("msg")
-@Views({ FreemarkerViewMaker.class, JPEGViewMaker.class })
+@Views({FreemarkerViewMaker.class,JPEGViewMaker.class})
 public class MainModule {
 
 }
