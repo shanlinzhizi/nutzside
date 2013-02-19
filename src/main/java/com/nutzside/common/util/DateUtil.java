@@ -10,7 +10,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 
+import com.nutzside.common.mvc.view.JPEGView;
 /**
  * 日期工具类<br>
  * 
@@ -20,7 +23,7 @@ import java.util.Locale;
  * @since 1.0
  */
 public class DateUtil {
-
+	private static final Log log = Logs.getLog(JPEGView.class);
 	/**
 	 * 获得当前时间，格式yyyy-MM-dd hh:mm:ss
 	 * 
@@ -29,6 +32,54 @@ public class DateUtil {
 	 */
 	public static String getCurrentDate() {
 		return getCurrentDate("yyyy-MM-dd hh:mm:ss");
+	}
+
+	/**
+	 * 把日期转换成字符串
+	 * 
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static String convertDate(Date date, String pattern) {
+		if (date != null) {
+			DateFormat format;
+			if (pattern == null || pattern.equals("")) {
+				format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			} else {
+				format = new SimpleDateFormat(pattern);
+			}
+
+			return format.format(date);
+
+		}
+		return null;
+	}
+
+	/**
+	 * 把字符串转换成日期类型
+	 * 
+	 * @param date
+	 * @param pattern
+	 * @return
+	 */
+	public static Date convertDate(String date, String pattern) {
+		if (date != null) {
+			DateFormat format;
+			if (pattern == null || pattern.equals("")) {
+				format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			} else {
+				format = new SimpleDateFormat(pattern);
+			}
+
+			try {
+				return format.parse(date);
+			} catch (ParseException e) {
+				log.fatal(e);
+			}
+
+		}
+		return null;
 	}
 
 	/**

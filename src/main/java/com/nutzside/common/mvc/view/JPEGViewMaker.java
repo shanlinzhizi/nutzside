@@ -14,9 +14,9 @@ public class JPEGViewMaker implements ViewMaker {
 
 	@Override
 	public View make(Ioc ioc, String type, String value) {
-		//log.debugf("Type:%s,Value:%s", type, value);
+		log.debugf("Type:%s,Value:%s", type, value);
 		if ("jpg".equalsIgnoreCase(type)) {
-			return new JPEGView("image/jpeg");
+			return new JPEGView();
 		}
 		return null;
 	}
