@@ -78,13 +78,14 @@ public class SystemModule {
 
 
 	@At
-	@Ok("forward:/main.html")
-	@Fail("redirect:/index.html")
-	public void main() {
+	@Ok("fm:main.main_layout")
+	@Fail("redirect:/index.jsp")
+	public DwzAjaxReturn main() {
 		Subject currentUser = SecurityUtils.getSubject();
 		if (!currentUser.isAuthenticated()) {
-			throw new RuntimeException("用户未登录!");
+			return DwzAjax.fail().setMessage("未登陆");
 		}
+		return null;
 	}
 
 	@At
@@ -94,7 +95,7 @@ public class SystemModule {
 		// TODO
 		// 用nutz重定向视图总是报异常org.apache.shiro.session.UnknownSessionException: There is no session with id...
 		// 所以暂时用这种方式重定向
-		response.sendRedirect("index.html");
+		response.sendRedirect("index.jsp");
 	}
 
 	

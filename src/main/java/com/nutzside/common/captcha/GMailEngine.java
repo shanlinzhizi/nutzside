@@ -38,7 +38,8 @@ public class GMailEngine extends ListImageCaptchaEngine {
 	private static final Integer MIN_FONT_SIZE = 15;// 验证码最小字体
 	private static final Integer MAX_FONT_SIZE = 15;// 验证码最大字体
 	private static final String RANDOM_WORD = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";// 随机字符
-	private static final String IMAGE_PATH =Thread.currentThread().getContextClassLoader().getResource("") +"/captcha/";// 随机背景图片路径
+	private static final String IMAGE_PATH ="captcha/";
+			//Thread.currentThread().getContextClassLoader().getResource("") +"/captcha/";// 随机背景图片路径
 	
 	
 	// 验证码随机颜色

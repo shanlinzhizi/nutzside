@@ -10,7 +10,7 @@
 <script type="text/javascript" src="res/template/admin/js/base.js"></script>
 <script type="text/javascript" src="res/template/admin/js/admin.js"></script>
 <script type="text/javascript">
-
+$(function () {
 	var $loginForm = $("#login_form");
 	var $username = $("#username");
 	var $password = $("#password");
@@ -35,14 +35,15 @@
 			"remeberMe":true,
 			"code":$captcha.val()
 		}, function(data) {
-			if (data.ok==true) {
-				location.href='/main';
+			if (data.statusCode==200) {
+				location.href='${base}/main';
 			} else {
-				$.dialog({type: "error", content: data.msg, modal: true, autoCloseTime: 3000});
+				$.dialog({type: "error", content: data.message, modal: true, autoCloseTime: 3000});
 			}
 		}, "json");
 		return false;
 	});
+
 	// 刷新验证码
 	var $captchaImage = $("#captchaImage");
 	$captchaImage.click( function() {
@@ -54,7 +55,7 @@
 		imageSrc = imageSrc + "?timestamp=" + timestamp;
 		$captchaImage.attr("src", imageSrc);
 	});
-
+});
 </script>
 <title>首页</title>
 </head>
