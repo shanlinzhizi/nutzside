@@ -8,10 +8,6 @@
 	<name>nutzside</name>
 	<url>http://nutzside.com</url>
 	<dependencies>
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
-			<version>2.4</version> <scope>provided</scope> </dependency> <dependency> 
-			<groupId>org.apache.tomcat</groupId> <artifactId>jsp-api</artifactId> <version>6.0.13</version> 
-			</dependency> -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-all</artifactId>
@@ -21,7 +17,7 @@
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz</artifactId>
-			<version>1.b.48-SNAPSHOT</version>
+			<version>1.b.47</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -64,15 +60,15 @@
 			<version>1.2.14</version>
 		</dependency>
 		<dependency>
-			<groupId>org.htmlparser</groupId>
-			<artifactId>htmlparser</artifactId>
-			<version>1.6</version>
-		</dependency>
-		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.8.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>httl</groupId>
+			<artifactId>httl</artifactId>
+			<version>1.0.7</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -115,7 +111,6 @@
 		<finalName>nutzside</finalName>
 	</build>
 
-
 	<repositories>
 		<repository>
 			<id>atlassian</id>
@@ -130,6 +125,11 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		<repository>
+			<id>httl-repository</id>
+			<name>Httl Repository</name>
+			<url>http://httl.github.com/maven</url>
 		</repository>
 	</repositories>
 

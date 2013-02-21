@@ -3,10 +3,7 @@ package com.nutzside.common.util;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.htmlparser.Node;
-import org.htmlparser.lexer.Lexer;
-import org.htmlparser.nodes.TextNode;
-import org.htmlparser.util.ParserException;
+
 
 /**
  * 字符串的帮助类，提供静态方法，不可以实例化。
@@ -151,29 +148,8 @@ public class StrUtils {
 		}
 	}
 
-	public static String htmlCut(String s, int len, String append) {
-		String text = html2Text(s, len * 2);
-		return textCut(text, len, append);
-	}
 
-	public static String html2Text(String html, int len) {
-		try {
-			Lexer lexer = new Lexer(html);
-			Node node;
-			StringBuilder sb = new StringBuilder(html.length());
-			while ((node = lexer.nextNode()) != null) {
-				if (node instanceof TextNode) {
-					sb.append(node.toHtml());
-				}
-				if (sb.length() > len) {
-					break;
-				}
-			}
-			return sb.toString();
-		} catch (ParserException e) {
-			throw new RuntimeException(e);
-		}
-	}
+	
 
 	/**
 	 * 检查字符串中是否包含被搜索的字符串。被搜索的字符串可以使用通配符'*'。
