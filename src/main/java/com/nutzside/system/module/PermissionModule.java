@@ -13,7 +13,7 @@ import com.nutzside.system.domain.Permission;
 import com.nutzside.system.service.PermissionService;
 
 @IocBean
-@At("/permission")
+@At("/system/permission")
 public class PermissionModule {
 
 	@Inject

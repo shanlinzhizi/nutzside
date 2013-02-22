@@ -21,7 +21,7 @@ import com.nutzside.system.service.PermissionService;
 import com.nutzside.system.service.RoleService;
 
 @IocBean
-@At("/admin/role")
+@At("/system/role")
 public class RoleModule {
 
 	@Inject

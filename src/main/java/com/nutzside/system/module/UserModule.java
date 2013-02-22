@@ -19,7 +19,7 @@ import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
 
 @IocBean
-@At("/admin/usr")
+@At("/system/usr")
 public class UserModule {
 
 	@At
