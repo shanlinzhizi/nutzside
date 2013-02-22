@@ -1,9 +1,11 @@
 package com.nutzside.common.mvc.view;
 
-import java.util.Enumeration;
+import httl.Context;
+import httl.web.WebEngine;
+
 import java.util.HashMap;
 import java.util.Map;
-import httl.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,31 +15,41 @@ import org.nutz.mvc.Mvcs;
 import org.nutz.mvc.View;
 import org.nutz.mvc.view.AbstractPathView;
 
-
-
-
 public class HTTLView extends AbstractPathView implements View {
 
 	private final String ext = ".httl";
-   
+
 	public HTTLView(String dest) {
 		super(dest);
-		
+
 	}
 
-	/* 渲染页面
-	 * @see org.nutz.mvc.View#render(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, java.lang.Object)
+	/*
+	 * 渲染页面
+	 * 
+	 * @see org.nutz.mvc.View#render(javax.servlet.http.HttpServletRequest,
+	 * javax.servlet.http.HttpServletResponse, java.lang.Object)
+	 * object 只能为Map 否则有无
 	 */
 	public void render(HttpServletRequest req, HttpServletResponse resp,
 			Object obj) throws Throwable {
-		 Engine engine = Engine.getEngine();//加载模板引擎
-			
-		
+
 		String path = evalPath(req, obj);
+
+		Context context = Context.getContext();
+		context.put("request", req);
+		context.put("response", resp);
+		WebEngine.getEngine()
+				.getTemplate(getTemplatePath(path, req), req.getLocale())
+				.render(obj, resp);
+
+	}
+
+	protected String getTemplatePath(String path, HttpServletRequest request) {
 
 		// 空路径，采用默认规则
 		if (Strings.isBlank(path)) {
-			path = Mvcs.getRequestPath(req);
+			path = Mvcs.getRequestPath(request);
 			path = (path.startsWith("/") ? "" : "/")
 					+ Files.renameSuffix(path, ext);
 		}
@@ -50,18 +62,11 @@ public class HTTLView extends AbstractPathView implements View {
 		else {
 			path = path.replace('.', '/') + ext;
 		}
-		
-		httl.Template template = engine.getTemplate(path);
-		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("obj", obj);
-		parameters.put("request", req);
-		parameters.put("response", resp);
-		parameters.put("session", req.getSession());
-		Enumeration<?> reqs = req.getAttributeNames();
-		while (reqs.hasMoreElements()) {
-			String strKey = (String) reqs.nextElement();
-			parameters.put(strKey, req.getAttribute(strKey));
-		}
-		template.render(parameters, resp.getOutputStream());
+
+		return path;
+	}
+
+	protected String getRootPath() {
+		return "/index.jsp";
 	}
 }

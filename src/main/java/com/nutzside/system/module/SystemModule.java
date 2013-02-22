@@ -56,7 +56,6 @@ public class SystemModule {
 						.validateResponseForID(
 								Mvcs.getHttpSession(true).getId(), auth);
 				if (isRight) {
-					Subject currentUser = SecurityUtils.getSubject();
 					UsernamePasswordToken token = new UsernamePasswordToken(
 							name, passwd);
 					token.setRememberMe(remeberMe);
@@ -83,15 +82,19 @@ public class SystemModule {
 	@At
 	@Ok("httl:pagemain.main_layout")
 	@Fail("redirect:/index.jsp")
-	public Object main() {
+	public Object main(HttpServletResponse response) throws IOException {
 		Subject currentUser = SecurityUtils.getSubject();
-		if (!currentUser.isAuthenticated()) {
-			return DwzAjax.fail().setMessage("未登陆");
+		if(!Strings.isEmpty( currentUser.getPrincipal().toString())  )
+        {  
+			Map<String, Object> parameters = new HashMap<String, Object>();
+			parameters.put("currentUser", currentUser.getPrincipal().toString());
+			return parameters;
+        }  
+		else{
+			 response.sendRedirect("index.jsp");
+			 return null;
 		}
-		Map<String, Object> parameters = new HashMap<String, Object>();
 		
-		parameters.put("username", getCurrentUserName());
-		return parameters;
 	}
 
 	@At
