@@ -18,12 +18,12 @@ import com.nutzside.common.mvc.view.JPEGViewMaker;
 import com.nutzside.system.shiro.ShiroActionFilter;
 
 @Encoding(input="utf8",output="utf8")
-@Modules(scanPackage = true)
+@Modules(packages = { "com.nutzside.system" ,"com.erp"}, scanPackage = true)
 @Ok("json")
 @Fail("json")
 @IocBy(type = ComboIocProvider.class, args = {
 		"*org.nutz.ioc.loader.json.JsonLoader", "ioc/",
-		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.nutzside" })
+		"*org.nutz.ioc.loader.annotation.AnnotationIocLoader", "com.nutzside","com.erp" })
 @SetupBy(value = MvcSetup.class)
 // 全局的Shiro注解过滤器
 @Filters(@By(type = ShiroActionFilter.class, args = "/index.jsp"))

@@ -8,13 +8,23 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
+import com.nutzside.system.module.SystemModule;
+
 /**
  * 
  * web工具类
  *
  */
 public class WebUtil {
-
+	
+	
+	public static String getLoginUser() {
+		SystemModule SystemModule=new SystemModule();
+		return SystemModule.getCurrentUserName();
+	}
 	/***
 	 * 获取URI的路径,如路径为http://www.lankew.com/action/post.htm?method=add, 得到的值为"/action/post.htm"
 	 * @param request

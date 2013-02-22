@@ -10,9 +10,8 @@ import org.nutz.dao.Dao;
 import org.nutz.lang.Times;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import com.erp.product.bean.Product;
 import com.nutzside.system.domain.Permission;
 import com.nutzside.system.domain.Role;
 import com.nutzside.system.domain.User;
@@ -24,11 +23,13 @@ public class MvcSetup implements Setup {
 	public void init(NutConfig config) {
 
 		Dao dao = config.getIoc().get(Dao.class);
+		
 		// 若必要的数据表不存在，则初始化数据库
 		if (!dao.exists(User.class)) {
 			dao.create(User.class, true);
 			dao.create(Role.class, true);
 			dao.create(Permission.class, true);
+			dao.create(Product.class, true);
 			createPermission(dao, "*:*:*", "全部权限");
 			createPermission(dao, "*:read:*", "读取权限");
 			createPermission(dao, "user:read:*", "对用户的浏览");

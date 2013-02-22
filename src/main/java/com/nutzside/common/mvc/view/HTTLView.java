@@ -1,5 +1,6 @@
 package com.nutzside.common.mvc.view;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import httl.*;
@@ -37,8 +38,7 @@ public class HTTLView extends AbstractPathView implements View {
 		// 空路径，采用默认规则
 		if (Strings.isBlank(path)) {
 			path = Mvcs.getRequestPath(req);
-			path = "WEB-INF"
-					+ (path.startsWith("/") ? "" : "/")
+			path = (path.startsWith("/") ? "" : "/")
 					+ Files.renameSuffix(path, ext);
 		}
 		// 绝对路径 : 以 '/' 开头的路径不增加 '/WEB-INF'
@@ -48,7 +48,7 @@ public class HTTLView extends AbstractPathView implements View {
 		}
 		// 包名形式的路径
 		else {
-			path = "WEB-INF/" + path.replace('.', '/') + ext;
+			path = path.replace('.', '/') + ext;
 		}
 		
 		httl.Template template = engine.getTemplate(path);
@@ -57,6 +57,11 @@ public class HTTLView extends AbstractPathView implements View {
 		parameters.put("request", req);
 		parameters.put("response", resp);
 		parameters.put("session", req.getSession());
+		Enumeration<?> reqs = req.getAttributeNames();
+		while (reqs.hasMoreElements()) {
+			String strKey = (String) reqs.nextElement();
+			parameters.put(strKey, req.getAttribute(strKey));
+		}
 		template.render(parameters, resp.getOutputStream());
 	}
 }

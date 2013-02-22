@@ -54,7 +54,7 @@ public class ShiroActionFilter implements ActionFilter {
 	private View view;
 
 	public ShiroActionFilter() {
-		view = new ServerRedirectView("/login.html");
+		view = new ServerRedirectView("/login.jsp");
 	}
 
 	public ShiroActionFilter(String view) {

@@ -10,6 +10,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -23,6 +24,7 @@ import org.nutz.mvc.annotation.Param;
 import com.nutzside.common.captcha.CaptchaServiceSingleton;
 import com.nutzside.common.web.ajax.DwzAjax;
 import com.nutzside.common.web.ajax.DwzAjaxReturn;
+import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
 import com.octo.captcha.service.CaptchaServiceException;
 
@@ -56,7 +58,6 @@ public class SystemModule {
 					UsernamePasswordToken token = new UsernamePasswordToken(
 							name, passwd);
 					token.setRememberMe(remeberMe);
-					currentUser.login(token); // 这里的授权,请查看shiro.ini中的nutRealm
 					return DwzAjax.ok();
 				} else {
 					return DwzAjax.fail().setMessage("验证码错误");
@@ -78,7 +79,7 @@ public class SystemModule {
 
 
 	@At
-	@Ok("fm:main.main_layout")
+	@Ok("httl:main.main_layout")
 	@Fail("redirect:/index.jsp")
 	public DwzAjaxReturn main() {
 		Subject currentUser = SecurityUtils.getSubject();
@@ -98,5 +99,9 @@ public class SystemModule {
 		response.sendRedirect("index.jsp");
 	}
 
+	public String getCurrentUserName() {
+		User cUser =(User) SecurityUtils.getSubject().getPrincipal();
+		return cUser.getName();
+	}
 	
 }
