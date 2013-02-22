@@ -155,7 +155,7 @@ $(function(){
 							<div class="right">
 							</div>
 							<p><span>nutzside</span></p>
-							<p>nutz,shiro和freemarker</p>
+							<p>nutz,shiro,Httl和freemarker </p>
 						</div>
 					</div>
 
