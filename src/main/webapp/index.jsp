@@ -117,7 +117,7 @@ $(function () {
                 </tr>
             </table>
             <div class="powered">
-            	COPYRIGHT © 2005-2011 NUTZ.ORG ALL RIGHTS RESERVED.
+            	COPYRIGHT © 2005-2011 NUTZSIDE.ORG ALL RIGHTS RESERVED.
             </div>
             <div class="link">
             	

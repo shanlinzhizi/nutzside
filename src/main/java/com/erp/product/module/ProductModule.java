@@ -30,7 +30,7 @@ import com.nutzside.common.util.WebUtil;
 * @date 2011-11-22
 * @version 1.0
 */
-@At("/Product")
+@At("/erp/Product")
 @IocBean(fields={"dao"})
 public class ProductModule extends EntityService<Product>{
 

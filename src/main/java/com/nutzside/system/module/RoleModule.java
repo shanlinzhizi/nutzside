@@ -30,7 +30,7 @@ public class RoleModule {
 	private PermissionService permissionService;
 
 	@At
-	@Ok("fm:admin.role_list")
+	@Ok("fm:system.role_list")
 	@RequiresPermissions("role:read:*")
 	public Object all() {
 		return roleService.getRoleListByPager(1, 20);
@@ -44,7 +44,7 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok("fm:admin.role_input")
+	@Ok("fm:system.role_input")
 	@RequiresRoles(value = { "admin", "security-admin" }, logical = Logical.OR)
 	public List<Permission> p_add() {
 		Mvcs.getReq().setAttribute("isAddAction", true);
@@ -52,21 +52,21 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:/admin/role/all")
+	@Ok(">>:/system/role/all")
 	@RequiresPermissions("role:create:*")
 	public void add(@Param("..") Role role) {
 		roleService.insert(role);
 	}
 
 	@At
-	@Ok(">>:/admin/role/delete")
+	@Ok(">>:/system/role/delete")
 	@RequiresPermissions("role:delete:*")
 	public void delete(@Param("id") Long id) {
 		roleService.delete(id);
 	}
 
 	@At
-	@Ok("fm:admin.role_input")
+	@Ok("fm:system.role_input")
 	@RequiresPermissions("role:read:*")
 	public List<Permission> view(@Param("id") Long id) {
 		Mvcs.getReq().setAttribute("isAddAction", false);
@@ -75,14 +75,14 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:/admin/role/edit")
+	@Ok(">>:/system/role/edit")
 	@RequiresPermissions("role:update:*")
 	public void edit(@Param("..") Role role) {
 		roleService.update(role);
 	}
 
 	@At
-	@Ok(">>:/admin/role/view?id=${p.roleId}")
+	@Ok(">>:/system/role/view?id=${p.roleId}")
 	@RequiresPermissions("role:permissionAssign:*")
 	public void addPermission(@Param("roleId") Long roleId,
 			@Param("permissionId") Long permissionId) {
@@ -90,7 +90,7 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:/admin/role/view?id=${p.roleId}")
+	@Ok(">>:/system/role/view?id=${p.roleId}")
 	@RequiresPermissions("role:permissionAssign:*")
 	public void removePermission(@Param("roleId") Long roleId,
 			@Param("permissionId") Long permissionId) {
@@ -98,7 +98,7 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:${obj==true? '/admin/role/all' : '/admin/role/p_add'}")
+	@Ok(">>:${obj==true? '/system/role/all' : '/system/role/p_add'}")
 	public boolean save(@Param("::role.") Role role, Integer[] pIDs) {
 		Role $role = roleService.fetchByName(role.getName());
 		if (Lang.isEmpty($role)) {
@@ -113,7 +113,7 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:${obj==true? '/admin/role/all' : '/admin/role/p_add'}")
+	@Ok(">>:${obj==true? '/system/role/all' : '/admin/role/p_add'}")
 	public boolean update(@Param("::role.") Role role, Long id, Integer[] pIDs) {
 		Role $role = roleService.fetch(id);
 		if (!Lang.isEmpty($role)) {

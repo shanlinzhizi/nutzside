@@ -1,10 +1,10 @@
-
+<#assign shiro=JspTaglibs["/WEB-INF/tld/shiro.tld"] />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>简单实用国产jQuery UI框架 - DWZ富客户端框架(J-UI.com)</title>
+<title>主页管理</title>
 
 <link href="${base}/res/themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="${base}/res/themes/css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -87,10 +87,9 @@ $(function(){
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="http://j-ui.com">标志</a>
 				<ul class="nav">
-					<li><a href="http://bbs.dwzjs.com" target="_blank">论坛</a></li>
-					<li><a href="login.html">退出</a></li>
+					<li><span class="welcome"><strong><@shiro.principal /></strong>&nbsp;您好!&nbsp;</span></li>
+					<li><a href="${base}/logout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="default"><div class="selected">蓝色</div></li>
@@ -123,8 +122,10 @@ $(function(){
 						<ul class="tree treeFolder">
 							<li><a href="tabsPage.html" target="navTab">面板</a>
 								<ul>
-								     <li><a href="${base}/Product/list" target="navTab" rel="product">产品设置</a></li>
-									
+								     <li><a href="${base}/erp/Product/list" target="navTab" rel="product">产品设置</a></li>
+									 <li><a href="${base}/system/usr/list" target="navTab" rel="product">用户管理</a></li>
+									  <li><a href="${base}/system/role/all" target="navTab" rel="product">角色管理</a></li>
+									  <li><a href="${base}/system/permission/all" target="navTab" rel="product">权限管理</a></li>
 								</ul>
 							</li>
 							</ul>
@@ -151,16 +152,10 @@ $(function(){
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox">
 						<div class="accountInfo">
-							<div class="alertInfo">
-								<h2><a href="doc/dwz-user-guide.pdf" target="_blank">DWZ框架使用手册(PDF)</a></h2>
-								<a href="doc/dwz-user-guide.swf" target="_blank">DWZ框架演示视频</a>
-							</div>
 							<div class="right">
-								<p><a href="doc/dwz-user-guide.zip" target="_blank" style="line-height:19px">DWZ框架使用手册(CHM)</a></p>
-								<p><a href="doc/dwz-ajax-develop.swf" target="_blank" style="line-height:19px">DWZ框架Ajax开发视频教材</a></p>
 							</div>
-							<p><span>DWZ富客户端框架</span></p>
-							<p>DWZ官方微博:<a href="http://weibo.com/dwzui" target="_blank">http://weibo.com/dwzui</a></p>
+							<p><span>nutzside</span></p>
+							<p>nutz,shiro和freemarker</p>
 						</div>
 					</div>
 
@@ -171,7 +166,7 @@ $(function(){
 
 	</div>
 
-	<div id="footer">Copyright &copy; 2010 <a href="demo_page2.html" target="dialog">nutzside</a> Tel：010-52897073</div>
+	<div id="footer">Copyright &copy; 2010 nutzside</a> </div>
 
 
 </body>

@@ -79,7 +79,7 @@ public class SystemModule {
 
 
 	@At
-	@Ok("httl:main.main_layout")
+	@Ok("fm:main.main_layout")
 	@Fail("redirect:/index.jsp")
 	public DwzAjaxReturn main() {
 		Subject currentUser = SecurityUtils.getSubject();

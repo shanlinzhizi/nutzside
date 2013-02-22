@@ -20,7 +20,7 @@ public class PermissionModule {
 	private PermissionService permissionService;
 
 	@At
-	@Ok("jsp:jsp.permission_list")
+	@Ok("jsp:system.permission_list")
 	// @Authorization(requiresPermissions = "permission:read:*")
 	public List<Permission> all() {
 		return permissionService.list();
@@ -34,35 +34,35 @@ public class PermissionModule {
 	}
 
 	@At
-	@Ok(">>:/permission/all")
+	@Ok(">>:/system/permission/all")
 	// @Authorization(requiresPermissions = "permission:delete:*")
 	public void delete(@Param("id") Long id) {
 		permissionService.delete(id);
 	}
 
 	@At
-	@Ok("jsp:jsp.permission_add")
+	@Ok("jsp:system.permission_add")
 	// @Authorization(requiresRolesAtLeastOne = "admin,security-admin")
 	public void p_add() {
 
 	}
 
 	@At
-	@Ok(">>:/permission/all")
+	@Ok(">>:/system/permission/all")
 	// @Authorization(requiresPermissions = "permission:create:*")
 	public void add(@Param("..") Permission permission) {
 		permissionService.insert(permission);
 	}
 
 	@At
-	@Ok("jsp:jsp.permission_view")
+	@Ok("jsp:system.permission_view")
 	// @Authorization(requiresPermissions = "permission:read:*")
 	public Permission view(@Param("id") Long id) {
 		return permissionService.view(id);
 	}
 
 	@At
-	@Ok(">>:/permission/all")
+	@Ok(">>:/system.permission/all")
 	// @Authorization(requiresPermissions = "permission:update:*")
 	public void edit(@Param("..") Permission permission) {
 		permissionService.update(permission);

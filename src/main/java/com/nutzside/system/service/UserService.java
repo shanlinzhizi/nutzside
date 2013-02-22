@@ -1,7 +1,9 @@
 package com.nutzside.system.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
@@ -9,8 +11,11 @@ import org.nutz.dao.QueryResult;
 import org.nutz.dao.pager.Pager;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
+import org.nutz.mvc.annotation.Param;
 import org.nutz.service.IdEntityService;
 
+import com.erp.product.bean.Product;
 import com.nutzside.system.domain.Role;
 import com.nutzside.system.domain.User;
 
@@ -29,6 +34,21 @@ public class UserService extends IdEntityService<User> {
 		return query(null, null);
 	}
 
+	
+	public Map<String, Object> Pagerlist( int pageNum ,int numPerPage,@Param("..") User obj) {
+		
+		Pager pager = dao().createPager((pageNum<1)?1:pageNum, (numPerPage < 1)? 20:numPerPage);
+		List<User> list = dao().query(User.class, bulidQureyCnd(obj), pager);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (pager != null) {
+			pager.setRecordCount(dao().count(User.class,bulidQureyCnd(obj)));
+			map.put("pager", pager);
+		}
+		map.put("o", obj);
+		map.put("list", list);
+		return map;
+
+	}
 	public void update(User user) {
 		dao().update(user);
 	}
@@ -72,5 +92,23 @@ public class UserService extends IdEntityService<User> {
 		List<User> list = dao().query(User.class, null, pager);
 		pager.setRecordCount(dao().count(User.class));
 		return new QueryResult(list, pager);
+	}
+	
+	
+	/**
+	 * 构建查询条件
+	 * @param obj
+	 * @return
+	 */
+	private Cnd bulidQureyCnd(User obj){
+		Cnd cnd=null;
+		if(obj!=null){
+			cnd=Cnd.where("1", "=", 1);
+	        //按名称查询
+	        if(!Strings.isEmpty(obj.getName()))
+				cnd.and("name", "=", obj.getName());
+	       
+		}
+		return cnd;
 	}
 }
