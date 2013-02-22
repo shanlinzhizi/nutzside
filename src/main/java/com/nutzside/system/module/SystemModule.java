@@ -1,6 +1,8 @@
 package com.nutzside.system.module;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -79,14 +81,17 @@ public class SystemModule {
 
 
 	@At
-	@Ok("fm:main.main_layout")
+	@Ok("httl:pagemain.main_layout")
 	@Fail("redirect:/index.jsp")
-	public DwzAjaxReturn main() {
+	public Object main() {
 		Subject currentUser = SecurityUtils.getSubject();
 		if (!currentUser.isAuthenticated()) {
 			return DwzAjax.fail().setMessage("未登陆");
 		}
-		return null;
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("username", getCurrentUserName());
+		return parameters;
 	}
 
 	@At
