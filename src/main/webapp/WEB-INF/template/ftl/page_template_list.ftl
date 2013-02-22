@@ -1,8 +1,9 @@
-<#macro Pager_list action_list  action_listui> 
-<form id="pagerForm" method="post" >
+<#macro Pager_list action_list="#"  action_listui="#"  action_delete   action_view="#"   action_edit="#"  action_name="数据"> 
+<form id="pagerForm" method="post" action="${base}/${action_list}">
 	<input type="hidden" name="pageNum" value="${obj.pager.pageNumber}" /> 
 	<input type="hidden" name="numPerPage" value="${obj.pager.pageSize}" />
 	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<#nested/> 
 </form>
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="${base}/${action_list}" method="post">
@@ -38,11 +39,20 @@
 			<tr>
 				<th width="26"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
 				<#nested/> 
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
 			<#list ${obj.list} as tobj>
-			       <#nested/> 
+			 <tr target="sid_product" rel="${tobj.id }">
+                   <td><input name="ids" value="'${tobj.id}'" type="checkbox"></td>
+				       <#nested/> 
+				<td>
+				<a title="删除${action_name}" target="ajaxTodo" href="${base}/${action_delete}?id=${tobj.id }" class="btnDel">删除${action_name}</a>
+				<a title="查看${action_name}" target="navTab" href="${base}/${action_view}?id=${tobj.id }" class="btnView">查看${action_name}</a>
+				<a title="编辑${action_name}" target="navTab" href="${base}/${action_edit}/edit?id=${tobj.id}" class="btnEdit">编辑${action_name}</a>
+				</td>
+				</tr>
 		    </#list> 
 		</tbody>
 	</table>
