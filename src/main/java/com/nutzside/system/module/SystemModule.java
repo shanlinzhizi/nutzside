@@ -80,7 +80,7 @@ public class SystemModule {
 
 
 	@At
-	@Ok("httl:pagemain.main_layout")
+	@Ok("fm:pagemain.main_layout")
 	@Fail("redirect:/index.jsp")
 	public Object main(HttpServletResponse response) throws IOException {
 		Subject currentUser = SecurityUtils.getSubject();

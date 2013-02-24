@@ -1,0 +1,85 @@
+<!--#set(Map pager,List pagerlist,Map obj)--> 
+<!--#macro($!pagerForm(String actionlist))-->   
+
+<form id="pagerForm" method="post" action="${actionlist}" >
+	<input type="hidden" name="pageNum" value="${pager.pageNumber}" /> 
+	<input type="hidden" name="numPerPage" value="${pager.pageSize}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+	  <!--#macro($!pagerForm_input)--> 
+	  
+      <!--#end-->
+</form>
+
+<!--#macro($!pageHeader(String actionlist,String actionlistui))--> 
+<!--#set(Map pager,List pagerlist,Map obj)-->     
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="${actionlist}" method="post">
+		<div class="searchBar">
+			<table class="searchContent">
+				 <!--#macro($!pageHeader_searchBar)--> 
+				     
+                  <!--#end-->
+			</table>
+			<div class="subBar">
+				<ul>
+					<li><div class="buttonActive">
+							<div class="buttonContent">
+								<button type="submit">检索</button>
+							</div>
+						</div></li>
+					<li><a class="button" href="${actionlistui}" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</form>
+</div>
+<!--#end-->
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		
+		 <!--#macro($!toolBar)-->     
+		 
+          <!--#end-->
+			
+			<li class="line">line</li>
+			<li><a class="icon" href="#" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				
+			  <!--#macro($!thead_th)-->     
+		      <!--#set(Map pager,List pagerlist)--> 
+              <!--#end-->
+			</tr>
+		</thead>
+		<tbody>
+		   <!--#foreach(obj  in pagerlist)-->
+			 
+		        <!--#macro($!tbody_th)-->     
+		       
+                <!--#end-->
+			<!--#end(foreach)-->
+		</tbody>
+	</table>
+	
+	<div class="panelBar">
+		<div class="pages">
+			<span>显示</span> 
+			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+		<!--#set(ss =10)-->
+		 <!--#foreach(s in [10,20,30,40])-->
+			<option value="${s.index}" ${pager.pageSize eq s.index ? 'selected="selected"' : ''}>${s.index}</option>
+		 <!--#end(foreach)-->
+		</select>
+			<span>条，共${pager.recordCount}条</span>
+		</div>
+
+		<div class="pagination" targetType="navTab" totalCount="${pager.recordCount}" numPerPage="${pager.pageSize}" pageNumShown="10" currentPage="${pager.pageNumber}"></div>
+
+	</div>
+</div>
+
+<!--#end-->

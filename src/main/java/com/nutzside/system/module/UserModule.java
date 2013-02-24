@@ -1,8 +1,7 @@
 package com.nutzside.system.module;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
@@ -10,7 +9,6 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.nutz.dao.pager.Pager;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Times;
@@ -19,6 +17,7 @@ import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
 import com.erp.product.bean.Product;
+import com.nutzside.common.util.DwzUtil;
 import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
 
@@ -71,10 +70,22 @@ public class UserModule {
 
 	@At
 	@Ok("jsp:system.user_add")
-	@RequiresRoles(value = { "admin", "user-superadmin", "user-admin" }, logical = Logical.OR)
+	@RequiresPermissions("user:add:*")
 	public void p_add() {
 	}
-
+	@At
+	//@Ok("jsp:system.user_list")
+	@RequiresPermissions("user:add:*")
+	public Object add(@Param("..") User obj){
+		try{
+	
+			userService.insert(obj);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK,"user");
+		}catch (Throwable e) {
+			
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
+	}
 	@At
 	@Ok(">>:/system/usr/view?id=${p.userId}")
 	@RequiresPermissions("user:roleAssign:*")

@@ -3,6 +3,7 @@ package com.nutzside.common.mvc.view;
 import httl.Context;
 import httl.web.WebEngine;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,12 @@ public class HTTLView extends AbstractPathView implements View {
 		Context context = Context.getContext();
 		context.put("request", req);
 		context.put("response", resp);
+		Enumeration<?> reqs = req.getAttributeNames();
+		while (reqs.hasMoreElements()) {
+			String strKey = (String) reqs.nextElement();
+			context.put(strKey, req.getAttribute(strKey));
+		}
+		
 		WebEngine.getEngine()
 				.getTemplate(getTemplatePath(path, req), req.getLocale())
 				.render(obj, resp);
@@ -64,9 +71,5 @@ public class HTTLView extends AbstractPathView implements View {
 		}
 
 		return path;
-	}
-
-	protected String getRootPath() {
-		return "/index.jsp";
 	}
 }

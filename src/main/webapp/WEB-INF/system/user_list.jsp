@@ -50,7 +50,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${obj.list}" var="user">
+			<c:forEach items="${obj.pagerlist}" var="user">
 				<tr target="sid_product" rel="${user.id }">
 				<td><input name="ids" value="'${user.id}'" type="checkbox"></td>
 				<td>${user.id}</a></td>

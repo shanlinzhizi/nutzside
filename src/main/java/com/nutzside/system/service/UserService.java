@@ -44,8 +44,8 @@ public class UserService extends IdEntityService<User> {
 			pager.setRecordCount(dao().count(User.class,bulidQureyCnd(obj)));
 			map.put("pager", pager);
 		}
-		map.put("o", obj);
-		map.put("list", list);
+		map.put("obj", obj);
+		map.put("pagerlist", list);
 		return map;
 
 	}

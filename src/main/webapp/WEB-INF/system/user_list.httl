@@ -1,0 +1,49 @@
+
+$!{extends("/template/page_list.httl")}
+<!--#macro(pagerForm(String actionlist))-->    
+#set (actionlist="system/usr/list" )
+$!{super.pagerForm}
+<!--#end-->
+<!--#macro(pagerForm_input)-->      
+$!{super.pagerForm_input}
+<!--#end-->
+
+
+<!--#macro(pageHeader(String actionlist,String actionlistui))-->  
+ #set (actionlist="system/usr/list",actionlistui="#" )   
+$!{super.pageHeader}			
+<!--#end-->
+
+
+<!--#macro(pageHeader_searchBar)-->      
+$!{super.pageHeader_searchBar}
+<!--#end-->
+	
+<!--#macro(toolBar)-->     
+$!{super.toolBar}		  
+<!--#end-->
+
+
+<!--#macro(thead_th)-->     
+$!{super.thead_th}	
+<th width="26"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+<th>编号</th>
+<th>账户</th>
+<th>部门</th>
+<th>操作</th>		  
+<!--#end-->
+
+<!--#macro(tbody_th)-->     
+$!{super.tbody_th}
+                <tr target="sid_product" rel="${obj.id }">
+				<td><input name="ids" value="'${obj.id}'" type="checkbox"></td>
+				<td>${obj.id}</a></td>
+				<td>${obj.name}</a></td>
+				<td>${obj.department}</td>
+				<td>
+				<a title="删除用户" target="ajaxTodo" href="system/usr/view?id=${obj.id}" class="btnDel">删除用户</a>
+				<a title="查看用户" target="navTab" href="system/usr/view?id=${obj.id}" class="btnView">查看用户</a>
+				<a title="编辑用户" target="navTab" href="system/usr/view?id=${obj.id}" class="btnEdit">编辑用户</a>
+				</td>
+				</tr>			  
+<!--#end-->
