@@ -45,11 +45,11 @@ public class HTTLView extends AbstractPathView implements View {
 			String strKey = (String) reqs.nextElement();
 			context.put(strKey, req.getAttribute(strKey));
 		}
-		
+
 		WebEngine.getEngine()
 				.getTemplate(getTemplatePath(path, req), req.getLocale())
 				.render(obj, resp);
-
+		
 	}
 
 	protected String getTemplatePath(String path, HttpServletRequest request) {

@@ -1,22 +1,18 @@
 package com.nutzside.system.module;
 
 import java.util.List;
-
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresGuest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
 import org.nutz.lang.Times;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
-
-import com.erp.product.bean.Product;
 import com.nutzside.common.util.DwzUtil;
 import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
@@ -55,8 +51,8 @@ public class UserModule {
 	}
 
 	@At
-	@Ok("jsp:system.user_list")
-	public Object list(@Param("pageNum") int pageNum ,@Param("numPerPage") int numPerPage,@Param("..") User obj){
+	@Ok("httl:system.user_list")
+	public Map<String, Object> list(@Param("pageNum") int pageNum ,@Param("numPerPage") int numPerPage,@Param("..") User obj){
 		
 		return userService.Pagerlist(pageNum, numPerPage, obj);
 	}

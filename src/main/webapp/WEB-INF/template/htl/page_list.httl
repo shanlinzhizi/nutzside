@@ -1,17 +1,15 @@
-<!--#set(Map pager,List pagerlist,Map obj)--> 
-<!--#macro($!pagerForm(String actionlist))-->   
+#set(String actionlist,String actionlistui)
+<!--#macro($!pagerForm)-->   
 
 <form id="pagerForm" method="post" action="${actionlist}" >
 	<input type="hidden" name="pageNum" value="${pager.pageNumber}" /> 
 	<input type="hidden" name="numPerPage" value="${pager.pageSize}" />
-	<input type="hidden" name="orderField" value="${param.orderField}" />
 	  <!--#macro($!pagerForm_input)--> 
 	  
       <!--#end-->
 </form>
 
-<!--#macro($!pageHeader(String actionlist,String actionlistui))--> 
-<!--#set(Map pager,List pagerlist,Map obj)-->     
+<!--#macro($!pageHeader)--> 
 <div class="pageHeader">
 	<form onsubmit="return navTabSearch(this);" action="${actionlist}" method="post">
 		<div class="searchBar">
@@ -51,17 +49,14 @@
 			<tr>
 				
 			  <!--#macro($!thead_th)-->     
-		      <!--#set(Map pager,List pagerlist)--> 
+		     
               <!--#end-->
 			</tr>
 		</thead>
 		<tbody>
-		   <!--#foreach(obj  in pagerlist)-->
-			 
-		        <!--#macro($!tbody_th)-->     
+           <!--#macro($!tbody_th)-->     
 		       
-                <!--#end-->
-			<!--#end(foreach)-->
+           <!--#end-->
 		</tbody>
 	</table>
 	
@@ -69,9 +64,12 @@
 		<div class="pages">
 			<span>显示</span> 
 			<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
-		<!--#set(ss =10)-->
 		 <!--#foreach(s in [10,20,30,40])-->
-			<option value="${s.index}" ${pager.pageSize eq s.index ? 'selected="selected"' : ''}>${s.index}</option>
+		  #if(s==pager.pageSize)
+			<option value="${s}"  selected="selected" }>${s}</option>
+		  #else
+		    <option value="${s}"  }>${s}</option>
+		 <!--#end(if)-->
 		 <!--#end(foreach)-->
 		</select>
 			<span>条，共${pager.recordCount}条</span>

@@ -15,7 +15,6 @@ import org.nutz.lang.Strings;
 import org.nutz.mvc.annotation.Param;
 import org.nutz.service.IdEntityService;
 
-import com.erp.product.bean.Product;
 import com.nutzside.system.domain.Role;
 import com.nutzside.system.domain.User;
 
@@ -44,7 +43,7 @@ public class UserService extends IdEntityService<User> {
 			pager.setRecordCount(dao().count(User.class,bulidQureyCnd(obj)));
 			map.put("pager", pager);
 		}
-		map.put("obj", obj);
+		map.put("o", obj);
 		map.put("pagerlist", list);
 		return map;
 
