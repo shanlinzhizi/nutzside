@@ -89,7 +89,7 @@ $(function(){
 			<div class="headerNav">
 				<ul class="nav">
 					<li><span class="welcome"><strong> ${currentUser}</strong>&nbsp;您好!&nbsp;</span></li>
-					<li><a href="${base}/logout">退出</a></li>
+					<li><a href="${base}/system/logout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
 					<li theme="default"><div class="selected">蓝色</div></li>

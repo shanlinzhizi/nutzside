@@ -12,7 +12,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.session.Session;
+
 import org.apache.shiro.subject.Subject;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -30,12 +30,12 @@ import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
 import com.octo.captcha.service.CaptchaServiceException;
 
+@At("/system")
 @IocBean
 public class SystemModule {
 
 	@Inject
 	private UserService userService;
-	
 	@At
 	@Fail(">>:/index.jsp")
 	@Ok("json")

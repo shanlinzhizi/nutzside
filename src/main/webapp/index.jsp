@@ -29,14 +29,14 @@ $(function () {
 			$.dialog({type: "warn", content: "请输入您的验证码!", modal: true, autoCloseTime: 3000});
 			return false;
 		}
-		$.post("${base}/login", {
+		$.post("${base}/system/login", {
 			"name" : $username.val(),
 			"passwd" : $password.val(),
 			"remeberMe":true,
 			"code":$captcha.val()
 		}, function(data) {
 			if (data.statusCode==200) {
-				location.href='${base}/main';
+				location.href='${base}/system/main';
 			} else {
 				$.dialog({type: "error", content: data.message, modal: true, autoCloseTime: 3000});
 			}
