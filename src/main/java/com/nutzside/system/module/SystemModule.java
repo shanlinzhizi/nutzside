@@ -56,9 +56,11 @@ public class SystemModule {
 						.validateResponseForID(
 								Mvcs.getHttpSession(true).getId(), auth);
 				if (isRight) {
+					Subject subject = SecurityUtils.getSubject();
 					UsernamePasswordToken token = new UsernamePasswordToken(
 							name, passwd);
 					token.setRememberMe(remeberMe);
+					subject.login(token);
 					return DwzAjax.ok();
 				} else {
 					return DwzAjax.fail().setMessage("验证码错误");
