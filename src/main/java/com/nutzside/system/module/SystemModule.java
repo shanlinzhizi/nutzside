@@ -12,6 +12,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+
 import org.apache.shiro.subject.Subject;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -22,11 +23,12 @@ import org.nutz.mvc.annotation.Fail;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
-import com.nutzside.common.mvc.view.JPEGView;
+import com.nutzside.common.captcha.CaptchaServiceSingleton;
 import com.nutzside.common.web.ajax.DwzAjax;
 import com.nutzside.common.web.ajax.DwzAjaxReturn;
 import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
+import com.octo.captcha.service.CaptchaServiceException;
 
 @At("/system")
 @IocBean
@@ -48,10 +50,12 @@ public class SystemModule {
 		} else if (Strings.isBlank(code)) {
 			return DwzAjax.fail().setMessage("请输入您的验证码!");
 		} else {
-		    String CAPTCHA= Mvcs.getHttpSession(true).getAttribute(JPEGView.CAPTCHA).toString();
 			String auth = org.apache.commons.lang.StringUtils.upperCase(code);
 			try {
-				if (CAPTCHA.equals(auth)) {
+				boolean isRight = CaptchaServiceSingleton.getInstance()
+						.validateResponseForID(
+								Mvcs.getHttpSession(true).getId(), auth);
+				if (isRight) {
 					UsernamePasswordToken token = new UsernamePasswordToken(
 							name, passwd);
 					token.setRememberMe(remeberMe);
@@ -59,6 +63,10 @@ public class SystemModule {
 				} else {
 					return DwzAjax.fail().setMessage("验证码错误");
 				}
+			} catch (CaptchaServiceException e) {
+				return DwzAjax
+						.fail()
+						.setMessage("Invalid ID, could not validate unexisting or already validated captcha");
 			} catch (LockedAccountException e) {
 				return DwzAjax.fail().setMessage("帐号已被锁定");
 			} catch (AuthenticationException e) {
