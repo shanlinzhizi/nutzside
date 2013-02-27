@@ -24,7 +24,7 @@
 <%--<input type="hidden" name="modifyDate" value="${obj.o.modifyDate}/> --%>
 </form>
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="Product/list" method="post">
+	<form onsubmit="return navTabSearch(this);" action="erp/Product/list" method="post">
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
@@ -46,7 +46,7 @@
 								<button type="submit">检索</button>
 							</div>
 						</div></li>
-					<li><a class="button" href="Product/queryUi" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
+					<li><a class="button" href="${base}/erp/Product/queryUi" target="dialog" mask="true" title="查询框"><span>高级检索</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" href="Product/addUi" target="navTab" rel="newPage" title="添加产品设置"><span>添加</span></a></li>
+			<li><a class="add" href="${base}/erp/Product/addUi" target="navTab" rel="newPage" title="添加产品设置"><span>添加</span></a></li>
 			<li><a title="确实要删除这些记录吗?" target="selectedTodo" rel="ids" postType="string" href="Product/delByIds" class="delete"><span>批量删除</span></a></li>
 			<li><a class="edit" href="Product/editUi?id={sid_product}" target="navTab" rel="newPage" title="修改产品设置"><span>修改</span></a></li>
 			<li class="line">line</li>
@@ -92,9 +92,9 @@
 					<td>${pro.modifyUser}</td>
 					<td>${pro.modifyDate}</td>
 				<td>
-				<a title="删除产品设置" target="ajaxTodo" href="Product/delete?id=${pro.id }" class="btnDel">删除产品设置</a>
-				<a title="查看产品设置" target="navTab" href="Product/view?id=${pro.id }" class="btnView">查看产品设置</a>
-				<a title="编辑产品设置" target="navTab" href="Product/editUi?id=${pro.id }" class="btnEdit">编辑产品设置</a>
+				<a title="删除产品设置" target="ajaxTodo" href="erp/Product/delete?id=${pro.id }" class="btnDel">删除产品设置</a>
+				<a title="查看产品设置" target="navTab" href="erp/Product/view?id=${pro.id }" class="btnView">查看产品设置</a>
+				<a title="编辑产品设置" target="navTab" href="erp/Product/editUi?id=${pro.id }" class="btnEdit">编辑产品设置</a>
 				</td>
 				</tr>
 			</c:forEach>

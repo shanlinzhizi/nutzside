@@ -30,7 +30,7 @@ $!{super.pageHeader_searchBar}
 	
 <!--#macro(toolBar)-->     
 $!{super.toolBar}
-			<li><a class="add" href="#" target="navTab" rel="newPage" title="添加用户"><span>添加</span></a></li>		  
+			<li><a class="add" href="${base}/system/usr/p_add" target="navTab" rel="newPage" title="添加用户"><span>添加</span></a></li>		  
 <!--#end-->
 
 
@@ -52,9 +52,8 @@ $!{super.tbody_th}
 				<td>${user.name}</a></td>
 				<td>${user.department}</td>
 				<td>
-				<a title="删除用户" target="ajaxTodo" href="system/usr/view?id=${user.id}" class="btnDel">删除用户</a>
-				<a title="查看用户" target="navTab" href="system/usr/view?id=${user.id}" class="btnView">查看用户</a>
-				<a title="编辑用户" target="navTab" href="system/usr/view?id=${user.id}" class="btnEdit">编辑用户</a>
+				<a title="删除用户" target="ajaxTodo" href="usr/delete?id=${user.id}" class="btnDel">删除用户</a>
+				<a title="查看用户" target="navTab" href="usr/view?id=${user.id}" rel="view" class="btnView">查看用户</a>
 				</td>
 				</tr>	
 <!--#end(foreach)-->		  

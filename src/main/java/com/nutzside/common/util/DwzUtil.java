@@ -22,10 +22,7 @@ public class DwzUtil {
 	public static final int FAIL = 300;
 	
 	
-    public static int getstatusCode(String status){
-    	
-        return (status == "OK") ? OK : FAIL;  	
-    }
+
     
     
 	/**
@@ -49,14 +46,14 @@ public class DwzUtil {
 		return map;
 	}
 
-	public static Map<String, Object> dialogAjaxMsg(String statusCode,
-			String navTabId, String Msg) {
+	public static Map<String, Object> dialogAjaxMsg(int statusCode,
+			String navTabId, String Msg,String callbackType) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("statusCode", getstatusCode(statusCode));
+		map.put("statusCode", statusCode);
 		map.put("message", Msg);
 		if (!Strings.isEmpty(navTabId)) {
 			map.put("navTabId", navTabId);
-			map.put("callbackType", "closeCurrent");
+			map.put("callbackType", callbackType);
 		}
 		return map;
 	}

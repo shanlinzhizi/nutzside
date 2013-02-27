@@ -1,0 +1,21 @@
+
+#set(actionadd="usr/add")
+#set(com.nutzside.system.domain.User o)
+
+$!{extends("/template/htl/page_add.httl")}
+<!--#macro(pageForm_Content)--> 
+$!{super.pageForm_Content}	
+            <p>
+				<label>编号：</label>
+				<input name="id" type="text" size="30" value="${o.id}"  maxlength="50"/>
+			</p>
+			<p>
+				<label>名称：</label>
+				<input name="name" type="text" size="30" value="${o.name}" class="required" maxlength="150"/>
+			</p>
+			<p>
+				<label>机构：</label>
+				<input name="department" type="text" size="30" value="${o.department}"  maxlength="150"/>
+			</p>	
+					     
+<!--#end-->

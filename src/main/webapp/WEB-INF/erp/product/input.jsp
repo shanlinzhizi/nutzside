@@ -22,7 +22,7 @@
 			</p>
 			<p>
 				<label>组织机构：</label>
-				<input name="organization" type="text" size="30" value="${obj.organization}" class="required" maxlength="10"/>
+				<input name="department" type="text" size="30" value="${obj.department}" class="required" maxlength="10"/>
 			</p>
 		
 		</div>

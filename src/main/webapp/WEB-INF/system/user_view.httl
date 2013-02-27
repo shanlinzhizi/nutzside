@@ -1,0 +1,94 @@
+
+#set(com.nutzside.system.domain.User obj)
+#set(Map dialogAjaxDone)
+
+<form method="post" action="usr/update" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		<fieldset>
+        <legend>编辑用户信息</legend>
+		<div class="pageFormContent" >
+			<input type="hidden" name="id" value="${obj.id}">
+			<p>
+				<label>名称：</label>
+				<input name="name" type="text" size="30" value="${obj.name}" class="required" maxlength="150"/>
+			</p>
+			<p>
+				<label>Email：</label>
+				<input name="email" type="text" size="30" value="${obj.email}"  maxlength="150"/>
+			</p>
+			
+			<p>
+				<label>组织机构：</label>
+				<input name="department" type="text" size="30" value="${obj.department}" class="required" maxlength="10"/>
+			</p>
+
+      </div>
+              <div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+    </div>
+    </fieldset>
+  </form>
+ 
+    <div class="span6">
+    <form action="${base}/system/usr/addRole" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);" >
+    <fieldset>
+      <legend>给用户 ${obj.name} 分配新角色</legend>
+      <input type="hidden" name="userId" value="${obj.id}"/>
+      <div class="control-group">
+        <label class="control-label" for="roleId">角色</label>
+        <div class="controls">
+          <select name="roleId" id="roleId">
+            <option value="0" selected>请选择欲分配的角色</option>
+          </select>
+        </div>
+      </div>
+      <div class="">
+        <input type="submit" value="分配" class="btn btn-primary"/>
+      </div>
+    </fieldset>
+    </form>
+   </div>
+ 
+    
+    
+    <hr/>
+    <h2>${obj.name}拥有的角色:</h2>
+    <table class="table" width="100%" layoutH="138">
+    <thead>
+    <tr>
+        <th>名称</th>
+        <th>备注</th>
+        <th>移除</th>
+      </tr>
+    </thead>
+ 
+     <tbody>
+     <!--#foreach(com.nutzside.system.domain.Role role  in obj.roles)-->
+        <tr>
+        <td>${role.name}</td>
+        <td>${role.description}</td>
+        
+        <td>
+        <a title="移除权限" target="ajaxTodo" href="${base}/system/usr/removeRole?userId=${obj.id}&roleId=${role.id}"  class="btnDel">移除</a>
+       </td>
+      </tr>
+    <!--#end(foreach)-->		
+   </tbody>
+
+    </table>
+  </div>
+  
+  
+  <script type="text/javascript">
+  $.getJSON('${base}/system/role/map',function(response){
+    $.each(response,function(value,text){
+      var newopt='<option value="'+value+'">'+text+'</option>';
+        $("#roleId").append(newopt);
+    });
+  });
+  </script>

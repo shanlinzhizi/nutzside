@@ -48,8 +48,13 @@ public class UserService extends IdEntityService<User> {
 		return map;
 
 	}
+	
 	public void update(User user) {
 		dao().update(user);
+	}
+	
+	public void delete(User user) {
+		dao().delete(user);
 	}
 
 	public void insert(User user) {

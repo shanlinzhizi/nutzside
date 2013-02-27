@@ -52,49 +52,97 @@ public class UserModule {
 
 	@At
 	@Ok("httl:system.user_list")
-	public Map<String, Object> list(@Param("pageNum") int pageNum ,@Param("numPerPage") int numPerPage,@Param("..") User obj){
-		
+	public Map<String, Object> list(@Param("pageNum") int pageNum,
+			@Param("numPerPage") int numPerPage, @Param("..") User obj) {
+
 		return userService.Pagerlist(pageNum, numPerPage, obj);
 	}
-	
+
 	@At
-	@Ok("jsp:system.user_view")
+	@Ok("httl:system.user_view")
 	@RequiresPermissions("user:read:*")
 	public User view(@Param("id") Long id) {
 		return userService.view(id);
 	}
 
 	@At
-	@Ok("jsp:system.user_add")
+	@Ok("httl:system.user_add")
 	@RequiresPermissions("user:add:*")
 	public void p_add() {
 	}
+
+    @At
+	@Ok("httl:system.query")
+    public void queryUi(){    	
+    }
+    
 	@At
-	//@Ok("jsp:system.user_list")
 	@RequiresPermissions("user:add:*")
-	public Object add(@Param("..") User obj){
-		try{
-	
+	public Object add(@Param("..") User obj) {
+		try {
+
 			userService.insert(obj);
-			return DwzUtil.dialogAjaxDone(DwzUtil.OK,"user");
-		}catch (Throwable e) {
-			
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "user");
+		} catch (Throwable e) {
+
 			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
 		}
 	}
+
 	@At
-	@Ok(">>:/system/usr/view?id=${p.userId}")
-	@RequiresPermissions("user:roleAssign:*")
-	public void addRole(@Param("userId") Long userId,
-			@Param("roleId") Long roleId) {
-		userService.addRole(userId, roleId);
+	@RequiresPermissions("user:update:*")
+	public Object update(@Param("..") User obj) {
+		try {
+
+			userService.update(obj);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "view");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
 	@At
-	@Ok(">>:/system/usr/view?id=${p.userId}")
+	@RequiresPermissions("user:delete:*")
+	public Object delete(@Param("..") User obj) {
+		try {
+
+			userService.delete(obj);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "user");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
+	}
+
+	@At
+	
 	@RequiresPermissions("user:roleAssign:*")
-	public void removeRole(@Param("userId") Long userId,
+	public Object addRole(@Param("userId") Long userId,
 			@Param("roleId") Long roleId) {
-		userService.removeRole(userId, roleId);
+
+		try {
+
+			userService.addRole(userId, roleId);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "view");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
+	}
+
+	@At
+	@RequiresPermissions("user:roleAssign:*")
+	public Object removeRole(@Param("userId") Long userId,
+			@Param("roleId") Long roleId) {
+
+		try {
+
+			userService.removeRole(userId, roleId);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "view");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 }
