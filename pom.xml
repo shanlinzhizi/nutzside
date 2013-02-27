@@ -77,6 +77,11 @@
 			<version>1.0.8</version>
 		</dependency>
 		<dependency>
+			<groupId>org.javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.15.0-GA</version>
+		</dependency>
+		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
@@ -87,12 +92,7 @@
 			<artifactId>standard</artifactId>
 			<version>1.1.2</version>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>0.11.6</version>
-			<scope>provided</scope>
-		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
