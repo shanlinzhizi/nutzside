@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="page">
 	<div class="pageContent">
-		<form method="post" action="Product/list" class="pageForm" onsubmit="return navTabSearch(this, 'product');">
+		<form method="post" action="${base}/erp/Product/list" class="pageForm" onsubmit="return navTabSearch(this, 'product');">
 			<div class="pageFormContent" layoutH="58">
 <!-- 				<div> -->
 <!-- 					<label>请输入检索条件：</label> -->

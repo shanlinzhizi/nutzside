@@ -82,6 +82,8 @@ public class DateUtil {
 		return null;
 	}
 
+
+	
 	/**
 	 * 获得当前时间，格式自定义
 	 * 
@@ -95,7 +97,6 @@ public class DateUtil {
 		String date = sdf.format(day.getTime());
 		return date;
 	}
-
 	/**
 	 * 获得昨天时间，格式自定义
 	 * 

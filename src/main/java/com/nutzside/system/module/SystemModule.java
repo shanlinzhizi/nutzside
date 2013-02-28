@@ -109,9 +109,5 @@ public class SystemModule {
 		response.sendRedirect("index.jsp");
 	}
 
-	public String getCurrentUserName() {
-		User cUser =(User) SecurityUtils.getSubject().getPrincipal();
-		return cUser.getName();
-	}
 	
 }
