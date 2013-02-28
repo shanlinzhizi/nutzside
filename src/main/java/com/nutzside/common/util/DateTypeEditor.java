@@ -6,7 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.commons.lang.StringUtils;
+import org.nutz.lang.Strings;
+
 
 /**
  * 日期编辑器
@@ -22,7 +23,7 @@ public class DateTypeEditor extends PropertyEditorSupport {
 
 	public void setAsText(String text) throws IllegalArgumentException {
 		text = text.trim();
-		if (!StringUtils.isBlank(text)) {
+		if (!Strings.isEmpty(text)) {
 			setValue(null);
 			return;
 		}

@@ -7,12 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-
 import org.apache.shiro.subject.Subject;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -50,7 +50,7 @@ public class SystemModule {
 		} else if (Strings.isBlank(code)) {
 			return DwzAjax.fail().setMessage("请输入您的验证码!");
 		} else {
-			String auth = org.apache.commons.lang.StringUtils.upperCase(code);
+			String auth = StringUtils.upperCase(code);
 			try {
 				boolean isRight = CaptchaServiceSingleton.getInstance()
 						.validateResponseForID(
