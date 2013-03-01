@@ -152,6 +152,10 @@
 			<name>Httl Repository</name>
 			<url>http://httl.github.com/maven</url>
 		</repository>
+		<repository>
+           <id>Alfresco Maven Repository</id>
+           <url>https://maven.alfresco.com/nexus/content/groups/public/</url>
+        </repository>
 	</repositories>
 
 </project>

@@ -93,7 +93,7 @@ $(function(){
 								<ul>
 								     <li><a href="${base}/erp/Product/list" target="navTab" rel="product">产品设置</a></li>
 									 <li><a href="${base}/system/usr/list" target="navTab" rel="user">用户管理</a></li>
-									  <li><a href="${base}/system/role/all" target="navTab" rel="role">角色管理</a></li>
+									  <li><a href="${base}/system/role/list" target="navTab" rel="role">角色管理</a></li>
 									  <li><a href="${base}/system/permission/all" target="navTab" rel="permission">权限管理</a></li>
 								</ul>
 							</li>

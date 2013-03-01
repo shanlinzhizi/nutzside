@@ -1,0 +1,17 @@
+
+#set(actionadd="role/add")
+#set(com.nutzside.system.domain.Role o)
+
+$!{extends("/template/htl/page_add.httl")}
+<!--#macro(pageForm_Content)--> 
+$!{super.pageForm_Content}	
+			<p>
+				<label>名称：</label>
+				<input name="name" type="text" size="30" value="${o.name}" class="required" maxlength="150"/>
+			</p>
+			<p>
+				<label>说明：</label>
+				<input name="description" type="text" size="30" value="${o.description}"  maxlength="150"/>
+			</p>	
+					     
+<!--#end-->

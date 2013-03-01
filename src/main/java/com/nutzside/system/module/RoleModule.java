@@ -3,9 +3,9 @@ package com.nutzside.system.module;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.Logical;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.authz.annotation.RequiresRoles;
+
 import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -15,8 +15,10 @@ import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
+import com.nutzside.common.util.DwzUtil;
 import com.nutzside.system.domain.Permission;
 import com.nutzside.system.domain.Role;
+import com.nutzside.system.domain.User;
 import com.nutzside.system.service.PermissionService;
 import com.nutzside.system.service.RoleService;
 
@@ -35,6 +37,15 @@ public class RoleModule {
 	public Object all() {
 		return roleService.getRoleListByPager(1, 20);
 	}
+	
+	
+	@At
+	@Ok("httl:system.role_list")
+	public Map<String, Object> list(@Param("pageNum") int pageNum,
+			@Param("numPerPage") int numPerPage, @Param("..") Role obj) {
+
+		return roleService.Pagerlist(pageNum, numPerPage, obj);
+	}
 
 	@At
 	@Ok("json")
@@ -44,61 +55,94 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok("fm:system.role_input")
-	@RequiresRoles(value = { "admin", "security-admin" }, logical = Logical.OR)
+	@Ok("httl:system.role_add")
+	@RequiresPermissions("role:read:*")
 	public List<Permission> p_add() {
 		Mvcs.getReq().setAttribute("isAddAction", true);
 		return permissionService.list();
 	}
 
 	@At
-	@Ok(">>:/system/role/all")
+
 	@RequiresPermissions("role:create:*")
-	public void add(@Param("..") Role role) {
-		roleService.insert(role);
+	public Object add(@Param("..") Role role) {
+		
+		try {
+			roleService.insert(role);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "role");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
 	@At
-	@Ok(">>:/system/role/delete")
 	@RequiresPermissions("role:delete:*")
-	public void delete(@Param("id") Long id) {
-		roleService.delete(id);
+	public Object delete(@Param("id") Long id) {
+		
+		try {
+			roleService.delete(id);
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "role");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
+
 	@At
-	@Ok("fm:system.role_input")
+	@Ok("httl:system.role_view")
 	@RequiresPermissions("role:read:*")
-	public List<Permission> view(@Param("id") Long id) {
-		Mvcs.getReq().setAttribute("isAddAction", false);
-		Mvcs.getReq().setAttribute("role", roleService.view(id));
-		return permissionService.list();
+	public Role view(@Param("id") Long id) {
+		return roleService.view(id);
 	}
 
+
 	@At
-	@Ok(">>:/system/role/edit")
 	@RequiresPermissions("role:update:*")
-	public void edit(@Param("..") Role role) {
-		roleService.update(role);
+	public Object edit(@Param("..") Role role) {
+		
+		try {
+			roleService.update(role);
+			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "role");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
 	@At
-	@Ok(">>:/system/role/view?id=${p.roleId}")
 	@RequiresPermissions("role:permissionAssign:*")
-	public void addPermission(@Param("roleId") Long roleId,
+	public Object addPermission(@Param("roleId") Long roleId,
 			@Param("permissionId") Long permissionId) {
-		roleService.addPermission(roleId, permissionId);
+
+		try {
+
+			roleService.addPermission(roleId, permissionId);
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "view");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
 	@At
-	@Ok(">>:/system/role/view?id=${p.roleId}")
 	@RequiresPermissions("role:permissionAssign:*")
-	public void removePermission(@Param("roleId") Long roleId,
+	public Object removePermission(@Param("roleId") Long roleId,
 			@Param("permissionId") Long permissionId) {
-		roleService.removePermission(roleId, permissionId);
+		
+		try {
+
+			roleService.removePermission(roleId, permissionId);
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "view");
+		} catch (Throwable e) {
+
+			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
+		}
 	}
 
 	@At
-	@Ok(">>:${obj==true? '/system/role/all' : '/system/role/p_add'}")
+
 	public boolean save(@Param("::role.") Role role, Integer[] pIDs) {
 		Role $role = roleService.fetchByName(role.getName());
 		if (Lang.isEmpty($role)) {
@@ -113,7 +157,6 @@ public class RoleModule {
 	}
 
 	@At
-	@Ok(">>:${obj==true? '/system/role/all' : '/admin/role/p_add'}")
 	public boolean update(@Param("::role.") Role role, Long id, Integer[] pIDs) {
 		Role $role = roleService.fetch(id);
 		if (!Lang.isEmpty($role)) {

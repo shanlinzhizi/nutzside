@@ -1,5 +1,5 @@
 
-#set(actionlist="system/usr/list",actionlistui="#")
+#set(actionlist="system/usr/list",actionlistui="system/usr/list")
 #set(com.nutzside.system.domain.User o)
 
 $!{extends("/template/htl/page_list.httl")}

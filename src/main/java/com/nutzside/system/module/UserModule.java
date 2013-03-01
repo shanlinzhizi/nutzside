@@ -72,7 +72,7 @@ public class UserModule {
 	}
 
     @At
-	@Ok("httl:system.query")
+	@Ok("httl:system.user_query")
     public void queryUi(){    	
     }
     
@@ -108,7 +108,7 @@ public class UserModule {
 		try {
 
 			userService.delete(obj);
-			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "user");
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "user");
 		} catch (Throwable e) {
 
 			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
@@ -124,7 +124,7 @@ public class UserModule {
 		try {
 
 			userService.addRole(userId, roleId);
-			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "view");
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "view");
 		} catch (Throwable e) {
 
 			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);
@@ -139,7 +139,7 @@ public class UserModule {
 		try {
 
 			userService.removeRole(userId, roleId);
-			return DwzUtil.dialogAjaxDone(DwzUtil.OK, "view");
+			return DwzUtil.dialogAjaxDonenoclose(DwzUtil.OK, "view");
 		} catch (Throwable e) {
 
 			return DwzUtil.dialogAjaxDone(DwzUtil.FAIL);

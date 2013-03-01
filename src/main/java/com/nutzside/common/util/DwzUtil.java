@@ -45,7 +45,17 @@ public class DwzUtil {
 		}
 		return map;
 	}
-
+	public static Map<String, Object> dialogAjaxDonenoclose(int statusCode,
+			String navTabId) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("statusCode", statusCode);
+		map.put("message", (statusCode == OK) ? "操作成功！" : "操作失败！");
+		if (!Strings.isEmpty(navTabId)) {
+			map.put("navTabId", navTabId);
+			map.put("callbackType", "");
+		}
+		return map;
+	}
 	public static Map<String, Object> dialogAjaxMsg(int statusCode,
 			String navTabId, String Msg,String callbackType) {
 		Map<String, Object> map = new HashMap<String, Object>();
