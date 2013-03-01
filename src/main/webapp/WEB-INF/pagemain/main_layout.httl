@@ -57,7 +57,7 @@ $(function(){
 		<div id="header">
 			<div class="headerNav">
 				<ul class="nav">
-					<li><span class="welcome"><strong> ${currentUser}</strong>&nbsp;您好!&nbsp;</span></li>
+					<li><span style="color: #FFF212;"><strong>${currentUser}</strong>&nbsp;您好!&nbsp;</span></li>
 					<li><a href="${base}/system/logout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
@@ -94,7 +94,7 @@ $(function(){
 								     <li><a href="${base}/erp/Product/list" target="navTab" rel="product">产品设置</a></li>
 									 <li><a href="${base}/system/usr/list" target="navTab" rel="user">用户管理</a></li>
 									  <li><a href="${base}/system/role/list" target="navTab" rel="role">角色管理</a></li>
-									  <li><a href="${base}/system/permission/all" target="navTab" rel="permission">权限管理</a></li>
+									  <li><a href="${base}/system/permission/list" target="navTab" rel="permission">权限管理</a></li>
 								</ul>
 							</li>
 							</ul>
@@ -124,7 +124,8 @@ $(function(){
 							<div class="right">
 							</div>
 							<p><span>nutzside</span></p>
-							<p>nutz,shiro,Httl和freemarker </p>
+							<p>nutz,shiro,Httl 构建一个应用  </p>
+							
 						</div>
 					</div>
 

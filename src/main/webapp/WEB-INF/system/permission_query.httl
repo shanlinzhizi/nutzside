@@ -1,0 +1,21 @@
+#set(actionadd="permission/list")
+#set(com.nutzside.system.domain.Permission o)
+
+$!{extends("/template/htl/page_query.httl")}
+<!--#macro(pageForm_Content)--> 
+$!{super.pageForm_Content}	
+
+<div class="divider">divider</div>
+		        <div>
+				<label>编号：</label>
+				<input type="text" name="id" value="${o.id}" size="25" />
+				<span class="inputInfo">编号</span>
+				</div>
+		        <div>
+				<label>名称：</label>
+				<input type="text" name="name" value="${o.name}" size="25" />
+				<span class="inputInfo">名称</span>
+				</div>
+				
+					     
+<!--#end-->

@@ -1,5 +1,5 @@
 
-#set(actionlist="system/usr/list",actionlistui="system/usr/list")
+#set(actionlist="usr/list",actionlistui="usr/queryUi")
 #set(com.nutzside.system.domain.User o)
 
 $!{extends("/template/htl/page_list.httl")}
@@ -30,7 +30,7 @@ $!{super.pageHeader_searchBar}
 	
 <!--#macro(toolBar)-->     
 $!{super.toolBar}
-			<li><a class="add" href="${base}/system/usr/p_add" target="navTab" rel="newPage" title="添加用户"><span>添加</span></a></li>		  
+			<li><a class="add" href="usr/p_add" target="navTab" rel="newPage" title="添加用户"><span>添加</span></a></li>		  
 <!--#end-->
 
 

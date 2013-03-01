@@ -17,7 +17,6 @@ import org.nutz.service.IdEntityService;
 
 import com.nutzside.system.domain.Permission;
 import com.nutzside.system.domain.Role;
-import com.nutzside.system.domain.User;
 
 @IocBean(fields = { "dao" })
 public class RoleService extends IdEntityService<Role> {

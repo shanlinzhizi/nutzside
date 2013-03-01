@@ -18,7 +18,6 @@ import org.nutz.mvc.annotation.Param;
 import com.nutzside.common.util.DwzUtil;
 import com.nutzside.system.domain.Permission;
 import com.nutzside.system.domain.Role;
-import com.nutzside.system.domain.User;
 import com.nutzside.system.service.PermissionService;
 import com.nutzside.system.service.RoleService;
 
@@ -38,7 +37,11 @@ public class RoleModule {
 		return roleService.getRoleListByPager(1, 20);
 	}
 	
-	
+    @At
+	@Ok("httl:system.role_query")
+    public void queryUi(){    	
+    }
+    
 	@At
 	@Ok("httl:system.role_list")
 	public Map<String, Object> list(@Param("pageNum") int pageNum,

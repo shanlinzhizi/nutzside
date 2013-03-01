@@ -26,7 +26,6 @@ import org.nutz.mvc.annotation.Param;
 import com.nutzside.common.captcha.CaptchaServiceSingleton;
 import com.nutzside.common.web.ajax.DwzAjax;
 import com.nutzside.common.web.ajax.DwzAjaxReturn;
-import com.nutzside.system.domain.User;
 import com.nutzside.system.service.UserService;
 import com.octo.captcha.service.CaptchaServiceException;
 

@@ -1,6 +1,6 @@
 
-#set(actionlist="role/list",actionlistui="role/queryUi")
-#set(com.nutzside.system.domain.Role o)
+#set(actionlist="permission/list",actionlistui="permission/queryUi")
+#set(com.nutzside.system.domain.Permission o)
 
 $!{extends("/template/htl/page_list.httl")}
 
@@ -23,35 +23,36 @@ $!{super.pageHeader}
 $!{super.pageHeader_searchBar}
 		<table class="searchContent">
 				<tr>
-					<td>名称：<input type="text" name="name" value="${o.name}"/></td>
+					<td>账户：<input type="text" name="name" value="${o.name}"/></td>
 				</tr>
 			</table>
 <!--#end-->
 	
 <!--#macro(toolBar)-->     
 $!{super.toolBar}
-<li><a class="add" href="role/p_add" target="navTab" rel="newPage" title="添加角色"><span>添加</span></a></li>		  
+			<li><a class="add" href="permission/p_add" target="navTab" rel="newPage" title="添加权限"><span>添加</span></a></li>		  
 <!--#end-->
 
 
 <!--#macro(thead_th)-->     
 $!{super.thead_th}	
 <th width="26"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
-<th>名称</th>
-<th>说明</th>
+<th>编号</th>
+<th>账户</th>
+<th>部门</th>
 <th>操作</th>		  
 <!--#end-->
 
 <!--#macro(tbody_th)-->     
 $!{super.tbody_th}
-<!--#foreach(com.nutzside.system.domain.Role obj  in pagerlist)-->
+<!--#foreach(com.nutzside.system.domain.Permission obj  in pagerlist)-->
               <tr target="sid_role" rel="${obj.id}">
 				<td><input name="ids" value="'${obj.id}'" type="checkbox"></td>
 				<td>${obj.name}</a></td>
 				<td>${obj.description}</td>
 				<td>
-				<a title="删除角色" target="ajaxTodo" href="role/delete?id=${obj.id}" class="btnDel">删除角色</a>
-				<a title="查看角色" target="navTab" href="role/view?id=${obj.id}" rel="view" class="btnView">查看角色</a>
+				<a title="删除权限" target="ajaxTodo" href="permission/delete?id=${obj.id}" class="btnDel">删除权限</a>
+				<a title="查看权限" target="navTab" href="permission/view?id=${obj.id}" rel="view" class="btnView">查看权限</a>
 				</td>
 				</tr>	
 <!--#end(foreach)-->		  
